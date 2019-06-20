@@ -1,0 +1,23 @@
+{
+  "name": "matts-dw-site-0.11.2-polling_edition",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "node server.js",
+    "deploy": "npm run build && gcloud app deploy"
+  },
+  "engines": {
+    "node": ">=10.0"
+  },
+  "dependencies": {
+    "@dashevo/dashcore-lib": "^0.17.6",
+    "@zeit/next-css": "^1.0.1",
+    "babel-plugin-styled-components": "^1.10.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.17.1",
+    "next": "7.0.2",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "styled-components": "^4.3.1"
+  }
+}

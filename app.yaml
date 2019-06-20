@@ -1,0 +1,13 @@
+service: dash-watch-verify-message
+runtime: nodejs10
+env: standard
+
+instance_class: F1
+automatic_scaling:
+  target_cpu_utilization: 0.6
+  min_instances: 0
+  max_instances: 1
+
+handlers:
+- url: /.*
+  secure: always
