@@ -1,4 +1,8 @@
 dispatch:
-  # All traffic routed to dash-watch-beta app
-  - url: "/verify_message"
-    service: dash-watch-verify-message
+# traffic routed to vote verifier
+  - url: "*/verify_message"
+    service: dw-verify
+
+  # All other traffic routed to dash-watch-beta app
+  - url: "*/*"
+    service: dash-watch-beta

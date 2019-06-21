@@ -16,12 +16,11 @@ app.prepare()
 
     // Internal API call to get Airtable data
     server.get('/verify_message', (req, res) => {
-
       var address = req.query.addr;
-      var signature = req.query.sig;
-      const msg = dashcore.Message(req.query.msg);
+      var signature = req.query.sig.toString();
+      const message = dashcore.Message(req.query.msg);
 
-      isValidSig = msg.verify(address, signature);
+      isValidSig = message.verify(address, signature);
 
       res.writeHead(200, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify(isValidSig))
