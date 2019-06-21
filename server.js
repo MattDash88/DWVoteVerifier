@@ -19,8 +19,6 @@ app.prepare()
         var input_sig = req.query.sig.toString();
         const message = dashcore.Message(req.query.msg);
 
-        console.log(input_sig.match(' ') !== null)
-
         if (input_sig.match(' ') !== null) {
           var signature = input_sig.split(' ').join('+');
         } else {
