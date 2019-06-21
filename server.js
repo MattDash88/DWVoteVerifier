@@ -8,22 +8,34 @@ const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT
 const app = next({ dev })
 
-const serialize = data => JSON.stringify({ data })
-
 app.prepare()
   .then(() => {
     const server = express()
 
     // Internal API call to get Airtable data
-    server.get('/verify_message', (req, res) => {
-      var address = req.query.addr;
-      var signature = req.query.sig.toString();
-      const message = dashcore.Message(req.query.msg);
+    server.get('/verify_message', (req, res) => {      
+      try {
+        var address = req.query.addr;
+        var input_sig = req.query.sig.toString();
+        const message = dashcore.Message(req.query.msg);
 
-      isValidSig = message.verify(address, signature);
+        console.log(input_sig.match(' ') !== null)
 
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify(isValidSig))
+        if (input_sig.match(' ') !== null) {
+          var signature = input_sig.split(' ').join('+');
+        } else {
+          var signature = input_sig
+        }
+        
+        isValidSig = message.verify(address, signature);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(isValidSig))
+      } catch(e) {
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify('Error:'+e+req.query.sig.toString()))
+      }
+      
     })
 
     // Routing to main page

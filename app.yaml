@@ -1,4 +1,4 @@
-service: dash-watch-verify-message
+service: dw-verify
 runtime: nodejs10
 env: standard
 
